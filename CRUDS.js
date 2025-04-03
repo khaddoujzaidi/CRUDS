@@ -18,41 +18,14 @@ function getTotal(){
         total.style.background = '#f10';
     }
 }
-// Initialisation dyal dataPro mn localStorage
+//create product
 let dataPro;
-
-if (localStorage.getItem('product') !== null) {
-    try {
-        dataPro = JSON.parse(localStorage.getItem('product'));
-        if (!Array.isArray(dataPro)) {
-            dataPro = [];
-        }
-    } catch (error) {
-        console.error("Error parsing localStorage data:", error);
-        dataPro = [];
-    }
-} else {
+if(localStorage.product =! null){
+    dataPro = JSON.parse(localStorage.product)
+}else{
     dataPro = [];
 }
-
-// Function bach nclear inputs ba3d l'ajout
-function clearInputs() {
-    title.value = "";
-    price.value = "";
-    taxes.value = "";
-    ads.value = "";
-    discount.value = "";
-    total.innerHTML = "0"; 
-    count.value = "";
-    category.value = "";
-}
-
-// Event handler bach nzid produit jdid
-submit.onclick = function () {
-    if (!dataPro) { 
-        dataPro = []; 
-    }
-
+submit.onclick = function(){
     let newPro = {
         title: title.value,
         price: price.value,
@@ -62,19 +35,11 @@ submit.onclick = function () {
         total: total.innerHTML,
         count: count.value,
         category: category.value
-    };
-
-    // Vérifier wach inputs makhdmin
-    if (newPro.title !== "" && newPro.price !== "" && newPro.category !== "") {
-        dataPro.push(newPro);
-        localStorage.setItem('product', JSON.stringify(dataPro));
-        
-        // Appeler clearInputs() bach nms7 inputs
-        clearInputs();
-    } else {
-        alert("⚠️ saisez les champs nécessaires ");
     }
-};
+    dataPro.push(newPro);
+    localStorage.setItem('product', JSON.stringify(dataPro) )
+
+}
 
 //read 
 //count 
